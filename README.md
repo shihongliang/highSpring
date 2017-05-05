@@ -52,6 +52,6 @@ public class DTController {
 	
 }
 
-启动Tomcat服务，输入：http://localhost:8080/highSpring/answer/l=1,7,3,4 可以测试结果
+启动Tomcat服务，输入：http://localhost:8080/highSpring/answer/l=1,7,3,4 页面会跳转出现测试结果
 
 
