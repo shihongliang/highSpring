@@ -21,13 +21,13 @@ import com.whu.basic.model.SystemContext;
 public class BaseDao<T> implements IBaseDao<T> {
 	private SessionFactory sessionFactory;
 	/**
-	 * ´´½¨Ò»¸öClassµÄ¶ÔÏóÀ´»ñÈ¡·ºĞÍµÄclass
+	 * åˆ›å»ºä¸€ä¸ªClassçš„å¯¹è±¡æ¥è·å–æ³›å‹çš„class
 	 */
 	private Class<?> clz;
 	
 	public Class<?> getClz() {
 		if(clz==null) {
-			//»ñÈ¡·ºĞÍµÄClass¶ÔÏó
+			//è·å–æ³›å‹çš„Classå¯¹è±¡
 			clz = ((Class<?>)
 					(((ParameterizedType)(this.getClass().getGenericSuperclass())).getActualTypeArguments()[0]));
 		}
@@ -104,7 +104,7 @@ public class BaseDao<T> implements IBaseDao<T> {
 			for(String key:keys) {
 				Object val = alias.get(key);
 				if(val instanceof Collection) {
-					//²éÑ¯Ìõ¼şÊÇÁĞ±í
+					//æŸ¥è¯¢æ¡ä»¶æ˜¯åˆ—è¡¨
 					query.setParameterList(key, (Collection)val);
 				} else {
 					query.setParameter(key, val);
@@ -131,9 +131,7 @@ public class BaseDao<T> implements IBaseDao<T> {
 		return query.list();
 	}
 
-	/* (non-Javadoc)
-	 * @see org.konghao.baisc.dao.IBaseDao#list(java.lang.String, java.util.Map)
-	 */
+	
 	public List<T> listByAlias(String hql, Map<String, Object> alias) {
 		return this.list(hql, null, alias);
 	}
@@ -178,10 +176,10 @@ public class BaseDao<T> implements IBaseDao<T> {
 		String cq = getCountHql(hql,true);
 		Query cquery = getSession().createQuery(cq);
 		Query query = getSession().createQuery(hql);
-		//ÉèÖÃ±ğÃû²ÎÊı
+		//è®¾ç½®åˆ«åå‚æ•°
 		setAliasParameter(query, alias);
 		setAliasParameter(cquery, alias); 
-		//ÉèÖÃ²ÎÊı
+		//è®¾ç½®å‚æ•°
 		setParameter(query, args);
 		setParameter(cquery, args);
 		Pager<T> pages = new Pager<T>();
